@@ -11,10 +11,11 @@ data class Fruit(val type: Int) {
         const val TYPE_APPLE = 1
         const val TYPE_BANANA = 2
     }
-    // 数据不应该被任意修改
+    // 可变数据
+    // 重构建议： 数据不应该被任意修改
     var weight: Int = 0
-    // 描述数据的关联关系
     // 数据泥团
+    // 重构建议： 描述数据的关联关系
     var sugarRipeness = 0.0
     var colorRipeness = 0.0
 

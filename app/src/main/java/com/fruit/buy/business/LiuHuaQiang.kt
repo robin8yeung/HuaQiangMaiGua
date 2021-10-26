@@ -24,7 +24,8 @@ class LiuHuaQiang {
         BulletBody.generate(), BulletBody.generate(), BulletBody.generate(), BulletBody.generate(),
     )
 
-    // 数据不应该被任意修改
+    // 可变数据
+    // 重构建议： 数据不应该被任意修改
     var wallet = Wallet()
 
     fun pickFruit(fruits: List<Fruit>): Fruit? = fruits
@@ -43,14 +44,17 @@ class LiuHuaQiang {
 
     fun getKillWilling(ripeness: Double) = ripeness < 0.5
 
-    // 委托取代继承
-    // 过长的函数 提炼函数取代注释
+    // 过长的函数
+    // 重构建议： 提炼函数取代注释
+    // 重构建议： 继承
+    // 重构建议： 委托取代继承
     fun shot(target: Any) {
         var bulletHead: BulletHead? = null
         var bulletBody: BulletBody? = null
+
+        // 重构建议： 拆分循环
+        // 重构建议： 管道取代遍历
         // 选择不会炸膛的BulletBody
-        // 拆分循环
-        // 管道取代遍历
         for(i in bulletBodies.indices) {
             if (bulletHead == null && i < bulletHeads.size) {
                 if (bulletHeads[i].factor % 2 == 0) {
@@ -64,6 +68,7 @@ class LiuHuaQiang {
                 }
             }
         }
+
         // 填充弹药并射击
         if (bulletHead != null && bulletBody != null) {
             gun.fill(Bullet(bulletHead, bulletBody))

@@ -17,7 +17,7 @@ class Bullet(
     }
 
     fun fire() {
-        // 分解/合并条件表达式
+        // 重构建议： 分解/合并条件表达式
         if (head.factor % 2 == 0 && body.factor % 2 == 0) {
             if (body.factor / 9 > 3) {
                 prepare(false)
@@ -32,7 +32,7 @@ class Bullet(
         }
     }
 
-    // 移除标记参数
+    // 重构建议： 移除标记参数
     private fun prepare(newVersion: Boolean) {
         if (newVersion) {
             Log.e("REFACTOR", "新版本子弹预热")
@@ -41,7 +41,7 @@ class Bullet(
         }
     }
 
-    // 移除标记参数
+    // 重构建议： 移除标记参数
     private fun destroy(dangerous: Boolean) {
         if (dangerous) {
             Log.e("REFACTOR", "子弹非正常销毁")
