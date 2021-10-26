@@ -4,6 +4,7 @@ import android.util.Log
 
 class Wallet {
     private var money = 1000.0
+
     fun pay(money: Double): Double {
         Log.e("REFACTOR", "支付 $money")
         this.money -= money

@@ -5,10 +5,7 @@ import com.fruit.buy.business.Boss
 import com.fruit.buy.business.LiuHuaQiang
 
 @ExperimentalStdlibApi
-class Main {
-    /**
-     * 卫语句取代嵌套
-     */
+object Main {
     fun main() {
         val liuHuaQiang = LiuHuaQiang()
         val boss = Boss()
@@ -18,6 +15,7 @@ class Main {
             if (targetFruit.colorRipeness < 0.5) {
                 liuHuaQiang.goAway()
             } else {
+                // 散弹式修改
                 Log.e("REFACTOR", "多少钱一斤")
                 val unitPrice = boss.getUnitPrice(targetFruit.type) * boss.getDiscount(targetFruit.type, targetFruit.colorRipeness)
                 Log.e("REFACTOR", "$unitPrice 块钱一斤")

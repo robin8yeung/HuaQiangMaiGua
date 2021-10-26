@@ -11,24 +11,12 @@ data class Fruit(val type: Int) {
         const val TYPE_APPLE = 1
         const val TYPE_BANANA = 2
     }
-    // 数据不应该被任意修改
+    // 可变数据
     var weight: Int = 0
-    // 描述数据的关联关系
     // 数据泥团
     var sugarRipeness = 0.0
     var colorRipeness = 0.0
 
     // 计算最终成熟度
     fun getRipeness(): Double = (sugarRipeness + colorRipeness) / 2f
-
-//    class Builder(val type: Int) {
-//        private var weight: Int = 0
-//        var sugarRipeness = 0.0
-//        var colorRipeness = 0.0
-//        fun setWeight(weight: Int): Builder = this.apply { this.weight = weight }
-//        fun setSugarRipeness(sugarRipeness: Double): Builder = this.apply { this.sugarRipeness = sugarRipeness }
-//        fun setColorRipeness(colorRipeness: Double): Builder = this.apply { this.colorRipeness = colorRipeness }
-//
-//        fun build(): Fruit = Fruit(this)
-//    }
 }
