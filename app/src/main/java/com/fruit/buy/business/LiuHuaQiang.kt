@@ -1,6 +1,8 @@
 package com.fruit.buy.business
 
 import android.util.Log
+import com.fruit.buy.business.fruit.Fruit
+import com.fruit.buy.business.fruit.Watermelon
 
 /**
  * 过长的类
@@ -29,7 +31,7 @@ class LiuHuaQiang {
     var wallet = Wallet()
 
     fun pickFruit(fruits: List<Fruit>): Fruit? = fruits
-        .firstOrNull { it.type == Fruit.TYPE_WATERMELON }
+        .firstOrNull { it is Watermelon }
         ?.also { Log.e("REFACTOR", "选择了$it") }
 
     fun getBuyWilling(unitPrice: Double): Boolean {
