@@ -24,10 +24,8 @@ data class Boss(private val name: String = "水果摊老板") {
         }.build()
     )
 
-    // 依恋情节
-    // 重构建议： 合理处理类之间的关系
-    fun takeMoney(wallet: Wallet, money: Double) {
-        income += wallet.pay(money)
+    fun takeMoney(money: Double) {
+        income += money
         Log.e(Constants.TAG, "老板的收入达到$income")
     }
 }

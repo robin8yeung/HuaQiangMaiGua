@@ -54,8 +54,12 @@ object Main {
         }
         Log.e(Constants.TAG, "都是大棚的瓜，你嫌贵我还嫌贵呢")
         Log.e(Constants.TAG, "行，来一个")
-        // 重构建议：数据类处理自己的数据
-        boss.takeMoney(liuHuaQiang.wallet, fruit.getTotalPrice())
+
+        // 依恋情节
+        // 重构建议： 合理处理类之间的关系
+        boss.takeMoney(liuHuaQiang.pay(
+            // 重构建议：数据类处理自己的数据
+            fruit.getTotalPrice()))
         return true
     }
 

@@ -13,22 +13,12 @@ class LiuHuaQiang {
         Log.e(Constants.TAG, "有一个人前来买瓜")
     }
 
-    private val gun = Gun()
-
-    private val bulletHeads = listOf(
-        BulletHead.generate(), BulletHead.generate(), BulletHead.generate(), BulletHead.generate(),
-        BulletHead.generate(), BulletHead.generate(), BulletHead.generate(), BulletHead.generate(),
-        BulletHead.generate(), BulletHead.generate(), BulletHead.generate(), BulletHead.generate(),
-    )
-    private val bulletBodies = listOf(
-        BulletBody.generate(), BulletBody.generate(), BulletBody.generate(), BulletBody.generate(),
-        BulletBody.generate(), BulletBody.generate(), BulletBody.generate(), BulletBody.generate(),
-        BulletBody.generate(), BulletBody.generate(), BulletBody.generate(), BulletBody.generate(),
-    )
+    // 重构建议：委托取代继承
+    private val gunMan = GunMan(Gun())
 
     // 可变数据
     // 重构建议： 数据不应该被任意修改
-    var wallet = Wallet()
+    private val wallet = Wallet()
 
     fun pickFruit(fruits: List<Fruit>): Fruit? = fruits
         .firstOrNull { it is Watermelon }
@@ -51,26 +41,10 @@ class LiuHuaQiang {
     // 重构建议： 继承
     // 重构建议： 委托取代继承
     fun shot(target: Any) {
-        generateSafeBullet()?.let {
-            fillAndShot(it, target)
-        }
-
+        gunMan.shot(target)
     }
 
-    private fun fillAndShot(bullet: Bullet, target: Any) {
-        gun.fill(bullet)
-        gun.shot(target)
-    }
-
-    private fun generateSafeBullet(): Bullet? {
-        // 重构建议： 拆分循环
-        // 重构建议： 管道取代遍历
-        val bulletHead = bulletHeads.firstOrNull { it.factor % 2 == 0 }
-        val bulletBody = bulletBodies.firstOrNull { it.factor % 2 == 0 }
-        return if (bulletHead != null && bulletBody != null) {
-            Bullet(bulletHead, bulletBody)
-        } else null
-    }
+    fun pay(money: Double): Double = wallet.pay(money)
 
     fun goAway() {
         Log.e(Constants.TAG, "走了")
