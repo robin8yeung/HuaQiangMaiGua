@@ -28,6 +28,6 @@ data class Boss(private val name: String = "水果摊老板") {
     // 重构建议： 合理处理类之间的关系
     fun takeMoney(wallet: Wallet, money: Double) {
         income += wallet.pay(money)
-        Log.e("REFACTOR", "老板的收入达到$income")
+        Log.e(Constants.TAG, "老板的收入达到$income")
     }
 }

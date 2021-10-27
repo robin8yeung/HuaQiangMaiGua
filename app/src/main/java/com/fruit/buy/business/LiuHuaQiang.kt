@@ -10,7 +10,7 @@ import com.fruit.buy.business.fruit.Watermelon
 @ExperimentalStdlibApi
 class LiuHuaQiang {
     init {
-        Log.e("REFACTOR", "有一个人前来买瓜")
+        Log.e(Constants.TAG, "有一个人前来买瓜")
     }
 
     private val gun = Gun()
@@ -32,14 +32,14 @@ class LiuHuaQiang {
 
     fun pickFruit(fruits: List<Fruit>): Fruit? = fruits
         .firstOrNull { it is Watermelon }
-        ?.also { Log.e("REFACTOR", "选择了$it") }
+        ?.also { Log.e(Constants.TAG, "选择了$it") }
 
     fun getBuyWilling(unitPrice: Double): Boolean {
         return if (unitPrice < 8) {
-            Log.e("REFACTOR", "What`s up. 你这瓜是金子做的还是瓜粒子是金子做的？")
+            Log.e(Constants.TAG, "What`s up. 你这瓜是金子做的还是瓜粒子是金子做的？")
             true
         } else {
-            Log.e("REFACTOR", "太贵了，我不买了")
+            Log.e(Constants.TAG, "太贵了，我不买了")
             false
         }
     }
@@ -51,34 +51,28 @@ class LiuHuaQiang {
     // 重构建议： 继承
     // 重构建议： 委托取代继承
     fun shot(target: Any) {
-        var bulletHead: BulletHead? = null
-        var bulletBody: BulletBody? = null
+        generateSafeBullet()?.let {
+            fillAndShot(it, target)
+        }
 
+    }
+
+    private fun fillAndShot(bullet: Bullet, target: Any) {
+        gun.fill(bullet)
+        gun.shot(target)
+    }
+
+    private fun generateSafeBullet(): Bullet? {
         // 重构建议： 拆分循环
         // 重构建议： 管道取代遍历
-        // 选择不会炸膛的BulletBody
-        for(i in bulletBodies.indices) {
-            if (bulletHead == null && i < bulletHeads.size) {
-                if (bulletHeads[i].factor % 2 == 0) {
-                    bulletHead = bulletHeads[i]
-                }
-            }
-
-            if (bulletBody == null) {
-                if (bulletBodies[i].factor % 2 == 0) {
-                    bulletBody = bulletBodies[i]
-                }
-            }
-        }
-
-        // 填充弹药并射击
-        if (bulletHead != null && bulletBody != null) {
-            gun.fill(Bullet(bulletHead, bulletBody))
-            gun.shot(target)
-        }
+        val bulletHead = bulletHeads.firstOrNull { it.factor % 2 == 0 }
+        val bulletBody = bulletBodies.firstOrNull { it.factor % 2 == 0 }
+        return if (bulletHead != null && bulletBody != null) {
+            Bullet(bulletHead, bulletBody)
+        } else null
     }
 
     fun goAway() {
-        Log.e("REFACTOR", "走了")
+        Log.e(Constants.TAG, "走了")
     }
 }

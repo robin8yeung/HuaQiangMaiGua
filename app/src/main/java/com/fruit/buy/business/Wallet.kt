@@ -6,7 +6,7 @@ class Wallet {
     private var money = 1000.0
 
     fun pay(money: Double): Double {
-        Log.e("REFACTOR", "支付 $money")
+        Log.e(Constants.TAG, "支付 $money")
         this.money -= money
         if (this.money < 0) throw RuntimeException("money < 0")
         return money

@@ -13,40 +13,50 @@ class Bullet(
 ) {
 
     init {
-        Log.e("REFACTOR", "子弹 head $head body $body")
+        Log.e(Constants.TAG, "子弹 head $head body $body")
     }
 
     fun fire() {
         // 重构建议： 分解/合并条件表达式
-        if (head.factor % 2 == 0 && body.factor % 2 == 0) {
-            if (body.factor / 9 > 3) {
-                prepare(false)
-            } else {
-                prepare(true)
-            }
-            destroy(false)
-            Log.e("REFACTOR", "子弹射击！！")
+        if (isSafe()) {
+            fireForSafe()
         } else {
-            destroy(true)
-            throw RuntimeException("子弹炸膛了！！")
+            fireForDangerous()
         }
     }
 
-    // 重构建议： 移除标记参数
-    private fun prepare(newVersion: Boolean) {
-        if (newVersion) {
-            Log.e("REFACTOR", "新版本子弹预热")
+    private fun fireForDangerous() {
+        destroyForDangerous()
+        throw RuntimeException("子弹炸膛了！！")
+    }
+
+    private fun fireForSafe() {
+        if (body.factor / 9 > 3) {
+            prepare()
         } else {
-            Log.e("REFACTOR", "子弹预热")
+            prepareForNewVersion()
         }
+        destroy()
+        Log.e(Constants.TAG, "子弹射击！！")
+    }
+
+    private fun isSafe() = head.factor % 2 == 0 && body.factor % 2 == 0
+
+    // 重构建议： 移除标记参数
+    private fun prepare() {
+        Log.e(Constants.TAG, "子弹预热")
+    }
+
+    private fun prepareForNewVersion() {
+        Log.e(Constants.TAG, "新版本子弹预热")
     }
 
     // 重构建议： 移除标记参数
-    private fun destroy(dangerous: Boolean) {
-        if (dangerous) {
-            Log.e("REFACTOR", "子弹非正常销毁")
-        } else {
-            Log.e("REFACTOR", "子弹正常销毁")
-        }
+    private fun destroy() {
+        Log.e(Constants.TAG, "子弹正常销毁")
+    }
+
+    private fun destroyForDangerous() {
+        Log.e(Constants.TAG, "子弹非正常销毁")
     }
 }

@@ -16,6 +16,10 @@ abstract class Fruit(builder: Builder) {
 
     abstract fun getDiscount(): Double
 
+    fun getFinalUnitPrice(): Double = getUnitPrice() * getDiscount()
+
+    fun getTotalPrice() = weight * getFinalUnitPrice()
+
     class Ripeness(
         val sugarRipeness: Double,
         val colorRipeness: Double

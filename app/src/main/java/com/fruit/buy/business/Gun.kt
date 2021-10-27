@@ -10,7 +10,7 @@ class Gun {
     }
 
     fun shot(target: Any) {
-        Log.e("REFACTOR", "瞄准 $target!")
+        Log.e(Constants.TAG, "瞄准 $target!")
         bullet?.fire()
     }
 }
