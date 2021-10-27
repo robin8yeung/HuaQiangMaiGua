@@ -2,9 +2,6 @@ package com.fruit.buy.business
 
 import android.util.Log
 
-/**
- * 过长的类
- */
 @ExperimentalStdlibApi
 class LiuHuaQiang {
     init {
@@ -24,7 +21,6 @@ class LiuHuaQiang {
         BulletBody.generate(), BulletBody.generate(), BulletBody.generate(), BulletBody.generate(),
     )
 
-    // 可变数据
     var wallet = Wallet()
 
     fun pickFruit(fruits: List<Fruit>): Fruit? = fruits
@@ -43,12 +39,10 @@ class LiuHuaQiang {
 
     fun getKillWilling(ripeness: Double) = ripeness < 0.5
 
-    // 过长的函数
     fun shot(target: Any) {
         var bulletHead: BulletHead? = null
         var bulletBody: BulletBody? = null
 
-        // 选择不会炸膛的BulletBody
         for(i in bulletBodies.indices) {
             if (bulletHead == null && i < bulletHeads.size) {
                 if (bulletHeads[i].factor % 2 == 0) {
@@ -63,7 +57,6 @@ class LiuHuaQiang {
             }
         }
 
-        // 填充弹药并射击
         if (bulletHead != null && bulletBody != null) {
             gun.fill(Bullet(bulletHead, bulletBody))
             gun.shot(target)

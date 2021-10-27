@@ -23,9 +23,6 @@ data class Boss(private val name: String = "水果摊老板") {
         },
     )
 
-    // 发散式变化
-    // 依恋情节
-    // Switch惊悚现身
     fun getUnitPrice(type: Int): Int = when(type) {
         Fruit.TYPE_APPLE -> 5
         Fruit.TYPE_BANANA -> 6
@@ -33,10 +30,6 @@ data class Boss(private val name: String = "水果摊老板") {
         else -> -1
     }
 
-    // 发散式变化
-    // 依恋情节
-    // 基本类型偏执
-    // Switch惊悚现身
     fun getDiscount(type: Int, colorRipeness: Double): Double = when(type) {
         Fruit.TYPE_APPLE -> colorRipeness
         Fruit.TYPE_BANANA -> colorRipeness * 0.8
@@ -44,7 +37,6 @@ data class Boss(private val name: String = "水果摊老板") {
         else -> 1.0
     }
 
-    // 依恋情节
     fun takeMoney(wallet: Wallet, money: Double) {
         income += wallet.pay(money)
         Log.e("REFACTOR", "老板的收入达到$income")
