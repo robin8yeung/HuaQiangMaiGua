@@ -5,6 +5,10 @@
 ## 流程
 
 ![image](./doc/image.jpeg)
+华强买瓜
+
+![华强宇宙](./doc/image.png)
+华强宇宙
 
 ### 主流程设定
 
